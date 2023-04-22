@@ -24,6 +24,7 @@ export class LoginComponent {
 
   onClickLogin(form:any){ // Cómo colocarlo sin necesidad de definir parámetro
     this.api.loginByEmail(form).subscribe({
+
       next: (data:any) =>{
       let dataResponse:any = data;
       localStorage.setItem("token", dataResponse.accessToken);
