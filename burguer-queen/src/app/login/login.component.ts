@@ -28,6 +28,7 @@ export class LoginComponent {
       let dataResponse:any = data;
       localStorage.setItem("token", dataResponse.accessToken);
       console.log(dataResponse);
+
       if(dataResponse.user.role === "waiter"){
         this.router.navigate(['menu'])
       } else if (dataResponse.user.role === "cheff") {
