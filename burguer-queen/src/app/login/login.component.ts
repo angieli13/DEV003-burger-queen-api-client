@@ -13,9 +13,10 @@ import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 })
 export class LoginComponent {
 
-  formLogin = new FormGroup({
+  formLogin = new FormGroup({//se utiliza para encapsular y gestionar la lógica de validación y estado de un formulario.
     email : new FormControl('', Validators.email),
     password : new FormControl('',Validators.required)
+    //FormControl maneja los valores y validaciones de un campo de formulario específico.
   })
 
   constructor( private api:ApiBQService, private router:Router) {}
@@ -65,4 +66,3 @@ export class LoginComponent {
 
 
 }
-

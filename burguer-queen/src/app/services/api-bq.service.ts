@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { LoginI } from '../interfaces/login.interface';
 import { ResponseI } from '../interfaces/response.interface';
-import { HttpClient, HttpHeaders } from '@angular/common/http'
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -19,7 +19,7 @@ export class ApiBQService {
   }
 
   // Fx para obtener prod
-  menu():Observable<any>{
+  getMenu():Observable<any>{
     let token = sessionStorage.getItem('token')
     let menuUrl = this.url + 'products'
     let productHeader = new HttpHeaders().set('Authorization', 'Bearer ' + token)
