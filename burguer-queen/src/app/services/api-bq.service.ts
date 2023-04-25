@@ -17,4 +17,14 @@ export class ApiBQService {
     let authUrl = this.url + 'login'
     return this.http.post<any>(authUrl, form)
   }
+
+  // Fx para obtener prod
+  menu():Observable<any>{
+    let token = sessionStorage.getItem('token')
+    let menuUrl = this.url + 'products'
+    let productHeader = new HttpHeaders().set('Authorization', 'Bearer ' + token)
+    console.log(productHeader);
+
+    return this.http.get<any>(menuUrl,{'headers': productHeader})
+  }
 }

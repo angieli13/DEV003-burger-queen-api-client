@@ -22,12 +22,15 @@ export class LoginComponent {
   errorStatus:boolean = false;
   errorMsg:any = "";
 
+// Al cerrar secion hace el sessionstorage . clear
+// Sevisio de productos
+
   onClickLogin(form:any){ // Cómo colocarlo sin necesidad de definir parámetro
     this.api.loginByEmail(form).subscribe({
 
       next: (data:any) =>{
       let dataResponse:any = data;
-      localStorage.setItem("token", dataResponse.accessToken);
+      sessionStorage.setItem("token", dataResponse.accessToken);
       console.log(dataResponse);
 
       if(dataResponse.user.role === "waiter"){
@@ -41,7 +44,7 @@ export class LoginComponent {
       }
     },
       error: (error:any) => {
-        console.log(error.error);
+        console.log(error);
 
           this.errorStatus = true;
           this.errorMsg = error.error;

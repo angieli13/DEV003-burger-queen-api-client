@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ApiBQService } from '../services/api-bq.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu',
@@ -6,6 +8,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent {
+
+  constructor( private api:ApiBQService, private router:Router) {
+    this.api.menu().subscribe({
+      next: (data:any) =>
+      console.log(data)})
+  }
+
   cardVisible = false;
   cardTitle = '';
   cardPrice = '';
