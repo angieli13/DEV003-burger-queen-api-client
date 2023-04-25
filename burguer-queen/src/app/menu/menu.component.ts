@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 
 export class MenuComponent {
 
-  cardVisible = false;
+  cardVisible = true;
   cardTitle = '';
   cardPrice = '';
   cardImage = '';
@@ -27,8 +27,10 @@ export class MenuComponent {
     this.api.getMenu().subscribe({
       next: (data: any) => {
         console.log(data);
-        this.products = data;
+        this.products = Object.values(data);
         // this.loading = false;
+        console.log(this.products);
+
       }
     });
   }

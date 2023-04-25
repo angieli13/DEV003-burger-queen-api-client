@@ -33,9 +33,11 @@
   <nav class="navbar navbar-expand-lg ">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
+        <!-- <button class="nav-link"  (click)="showCard('todo')">Toad</button> -->
         <a class="nav-link"  (click)="showCard('todo')">Todo</a>
       </li>
       <li class="nav-item">
+        <!-- <button class="nav-link"  (click)="showCard('todo')">Toad</button> -->
         <a class="nav-link"  (click)="showCard('desayuno')">Desayuno</a>
       </li>
       <li class="nav-item">
@@ -51,19 +53,23 @@
           <div class="row">
             <div class="col col-card">
               <div class="card">
-                <div class="row">
-                  <div class="col-md-4">
-                    <!-- Aquí se muestra la imagen en la tarjeta -->
-                    <img src="{{ cardImage }}" alt="{{ cardTitle }}" class="card-img">
-                  </div>
-                  <div class="col-md-8 ">
-                    <div class="card-body">
-                      <h5 class="card-title">{{ cardTitle }}</h5>
-                      <p class="card-price">Precio: {{ cardPrice }}</p>
-                      <button class="btn" value="+">+</button>
+                <ul>
+                  <li *ngFor="let product of products">
+                    <div class="row">
+                      <div class="col-md-4">
+                        <!-- Aquí se muestra la imagen en la tarjeta -->
+                        <img src="{{ product.image }}" alt="{{ product.name }}" class="card-img">
+                      </div>
+                      <div class="col-md-8 ">
+                        <div class="card-body">
+                          <h5 class="card-title">{{ product.name }}</h5>
+                          <p class="card-price">Precio: {{ product.price }}</p>
+                          <button class="btn" value="+">+</button>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
