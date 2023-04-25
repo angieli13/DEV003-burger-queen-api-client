@@ -39,7 +39,7 @@ export class MenuComponent {
         break;
       case 'bebidas':
         this.cardTitle = 'Agua 500ml';
-        this.cardPrice = '$0.99';
+        this.cardPrice = '$1.00';
         this.cardImage = '../assets/images/agua.png';
         break;
       default:
