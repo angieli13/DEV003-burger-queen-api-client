@@ -63,14 +63,14 @@
 .menuDesplegable ul li:hover {
   background-color: #FDE293;
   opacity: 10;
-  border-radius: 25px;
+  border-radius: 10px;
   font-family: caviarD;
 
 }
 //====================  Estilos de los dos contenedores ====================//
 
 .row-estilo2 {
- height: 550px;
+  height: 550px;
 }
 .texto {
   font-family: caviarD;
@@ -78,7 +78,7 @@
 .cliente {
   background: #FDE293;
   opacity: 10;
-  border-radius: 25px;
+  border-radius: 10px;
   width: 80%;
 }
 .cliente::placeholder {
@@ -88,7 +88,7 @@
 
 .navbar-expand-lg {
   background-color: #EA8D6F;
-  border-radius: 25px;
+  border-radius: 20px;
   margin-top: 3%;
   display: flex;
   justify-content: center;
@@ -98,11 +98,15 @@
   width: 100px;
   font-family: caviarD;
 }
+.filter-btn{
+  background-color: #EA8D6F;
+  border: transparent;
+}
 
-.navbar-expand-lg .navbar-nav > .nav-item > .nav-link:hover {
+.navbar-expand-lg .navbar-nav > .nav-item > .filter-btn:hover {
   background-color: #FDE293;
   opacity: 10;
-  border-radius: 25px;
+  border-radius: 10px;
 }
 
 
@@ -151,13 +155,13 @@
 .col-segundaC {
   background-color: #fde293;
   opacity: 9;
-  border-radius: 25px;
+  border-radius: 10px;
 }
 .col-orden {
   margin-top: 20px;
   margin-left: 15%;
-    background-color: #EA8D6F;
-  border-radius: 25px;
+  background-color: #EA8D6F;
+  border-radius: 15px;
   height: 40px;
   width: 70%;
   font-family: caviarD;
