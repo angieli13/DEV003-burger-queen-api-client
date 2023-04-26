@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ApiBQService } from '../services/api-bq.service';
 import { Router } from '@angular/router';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-menu',
@@ -24,10 +25,11 @@ export class MenuComponent {
   }
 
   loadProducts() {
-    this.api.getMenu().subscribe({
+    this.api.getMenu()
+    .subscribe({
       next: (data: any) => {
         console.log(data);
-        this.products = Object.values(data);
+        this.products = data;
         // this.loading = false;
         console.log(this.products);
 
@@ -37,19 +39,37 @@ export class MenuComponent {
 
   showCard(productType: string) {
     // if (!this.loading) {
-      const filteredProducts = this.products.filter(product => product.type === productType);
+     //console.log('hola soy linea 42')
+      console.log(productType)
+      this.products = this.products.filter(product => product.type === productType);
+      console.log(this.products)
 
-      if (filteredProducts.length > 0) {
-        const product = filteredProducts[0];
-        this.cardTitle = product.name;
-        this.cardPrice = '$' + product.price;
-        this.cardImage = product.image;
-        this.cardVisible = true;
-      } else {
-        this.cardVisible = false;
-      }
+      // if (filteredProducts.length > 0) {
+      //   const product = filteredProducts[0];
+      //   this.cardTitle = product.name;
+      //   this.cardPrice = '$' + product.price;
+      //   this.cardImage = product.image;
+      //   this.cardVisible = true;
+      // } else {
+      //   this.cardVisible = false;
+      // }
     }
-  //}
+
+//   showCard(productType: string) {
+//     // if (!this.loading) {
+//       const filteredProducts = this.products.filter(product => product.type === productType);
+
+//       if (filteredProducts.length > 0) {
+//         const product = filteredProducts[0];
+//         this.cardTitle = product.name;
+//         this.cardPrice = '$' + product.price;
+//         this.cardImage = product.image;
+//         this.cardVisible = true;
+//       } else {
+//         this.cardVisible = false;
+//       }
+//     }
+//   //}
 
 
 
@@ -111,6 +131,3 @@ export class MenuComponent {
   }
 
 }
-
-
-
