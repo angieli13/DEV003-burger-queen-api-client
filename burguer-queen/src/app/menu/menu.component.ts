@@ -19,7 +19,19 @@ export class MenuComponent {
   allProducts: any[] = []; // para almacenar todos los productos
   products: any[] = []; // para almacenar los productos que se obtienen del servicio api.getMenu
   productsSelected: any[] = []; // para almacenar los productos seleccionados
+  order:any = {
+    client: "nombre",
+    products: [
+      {
+      qty: 0,
+      product: {
 
+      }
+      }
+    ],
+    status: "pending",
+    dataEntry: "1996-12-06 16:20"
+  }
 
   constructor(private api: ApiBQService, private router: Router) {
     this.loadProducts(); /*para cargar los productos desde la API*/
@@ -48,6 +60,8 @@ export class MenuComponent {
 
   addProductToOrder(product: any) {
     this.productsSelected.push(product);
+    this.order.products.push(product);
+    console.log(this.order.products)
   }
 
 

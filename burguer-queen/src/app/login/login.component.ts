@@ -32,7 +32,7 @@ export class LoginComponent {
       next: (data:any) =>{
       let dataResponse:any = data;
       sessionStorage.setItem("token", dataResponse.accessToken);
-      console.log(dataResponse);
+      console.log(dataResponse.token);
 
       if(dataResponse.user.role === "waiter"){
         this.router.navigate(['menu'])
