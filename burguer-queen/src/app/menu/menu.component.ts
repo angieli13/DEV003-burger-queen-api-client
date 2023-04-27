@@ -18,6 +18,8 @@ export class MenuComponent {
   cardImage = '';
   allProducts: any[] = []; // para almacenar todos los productos
   products: any[] = []; // para almacenar los productos que se obtienen del servicio api.getMenu
+  productsSelected: any[] = []; // para almacenar los productos seleccionados
+
 
   constructor(private api: ApiBQService, private router: Router) {
     this.loadProducts(); /*para cargar los productos desde la API*/
@@ -43,6 +45,12 @@ export class MenuComponent {
     }
     console.log(this.products)
   }
+
+  addProductToOrder(product: any) {
+    this.productsSelected.push(product);
+  }
+
+
 
 
   //====================================== menú hamburguesa ======================================//
