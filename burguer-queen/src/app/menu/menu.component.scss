@@ -148,15 +148,25 @@
   border-radius: 25px;
 }
 .container-card {
-  max-height: 400px; /* Puedes ajustar este valor según tus necesidades */
-  overflow-y: auto; /* Añade una barra de desplazamiento vertical si el contenido excede la altura máxima */
+  max-height: 400px;
+  overflow-y: auto; /* Añade scrollbar */
+  overflow-x: hidden;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+  border-radius: 25px;
+  scrollbar-base-color:#EA8D6F;
 }
+.container-card::-webkit-scrollbar-track {
+  background: #810707;
+}
+
+
 // Segundo contenedor
 .col-segundaC {
   background-color: #fde293;
   opacity: 9;
   border-radius: 25px;
   box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+  height: 530px;
 }
 .col-orden {
   margin-top: 20px;
@@ -172,7 +182,7 @@
 }
 
 .col-aparecenLasO {
-  height: 430px;
+  height: 400px;
   display: flex;
   align-items: center;
   background-color: #fde293;

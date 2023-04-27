@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { LoginI } from '../interfaces/login.interface';
 import { ResponseI } from '../interfaces/response.interface';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs';//un observable es un flujo de eventos o datos
 
 @Injectable({
   providedIn: 'root'
@@ -27,4 +27,5 @@ export class ApiBQService {
 
     return this.http.get<any>(menuUrl,{'headers': productHeader})
   }
+
 }
