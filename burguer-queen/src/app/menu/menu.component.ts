@@ -84,16 +84,21 @@ export class MenuComponent {
   }
 
   // Fx de botón + de order list que agrega cantidad de productos
-  increaseQty(product: any){
-    product.qty += 1;
-  }
+  increaseQty(product: OrderProductI) {
+    product.qty++;
+    this.bill += product.product.price;
+      }
+
+
 
   // Fx de botón - de order list que disminuye cantidad de productos
-  decreaseQty(product: any){
+  decreaseQty(product: OrderProductI){
     if (product.qty === 0){
       product.qty = 0
+
     } else {
-      product.qty -= 1
+      product.qty --;
+      this.bill -= product.product.price;
     }
   }
 

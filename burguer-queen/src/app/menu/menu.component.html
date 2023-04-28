@@ -86,6 +86,7 @@
         <li *ngFor="let productSelected of productsSelected">
           {{productSelected.product.name }} - Precio: {{ productSelected.product.price }}
           <button class="btn" (click)="decreaseQty(productSelected)">-</button>
+          <p>{{productSelected.qty}}</p>
           <button class="btn" (click)="increaseQty(productSelected)">+</button>
 
         </li>
@@ -95,8 +96,7 @@
     <!-- Tercer contenedor -->
     <div class="col mx-auto d-block text-center">
       <div class="d-flex align-items-center justify-content-center">
-        <label for="name" class="Total">Total: </label>
-        <input class="Total-input form-control" type="text" />
+        <p>Total: {{bill}}</p>
         <button class="btn-crearPedido" (click)="createOrder()">Crear pedido</button>
       </div>
     </div>
