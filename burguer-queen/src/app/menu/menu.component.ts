@@ -19,7 +19,8 @@ export class MenuComponent {
   cardImage = '';
   allProducts: any[] = []; // para almacenar todos los productos
   products: any[] = []; // para almacenar los productos que se obtienen del servicio api.getMenu
-  productsSelected: any[] = []; // para almacenar los productos seleccionados
+  productsSelected: any[] = []; // para almacenar los productos seleccionados y luego agregarlos a la orden
+  bill:number = 0;
 
   order:any = {
     client: "",
@@ -27,7 +28,7 @@ export class MenuComponent {
 
     ],
     status: "pending",
-    dataEntry: "1996-12-06 05:20"
+    dataEntry: ""
   }
 
   constructor(private api: ApiBQService, private router: Router) {
@@ -61,6 +62,7 @@ export class MenuComponent {
   //   console.log(this.order.products)
   // }
 
+  // Fx que crea estructura con el dato de los productos seleccionados y los agrega al array productsSelected
   addProductToOrder(product: any) {
     const addProduct = {
       qty: 1,
@@ -74,13 +76,19 @@ export class MenuComponent {
       }
     };
 
+    this.bill += 1 * product.price;
+    console.log(this.bill);
+
+
     this.productsSelected.push(addProduct);
   }
 
-  addQty(product: any){
+  // Fx de botón + de order list que agrega cantidad de productos
+  increaseQty(product: any){
     product.qty += 1;
   }
 
+  // Fx de botón - de order list que disminuye cantidad de productos
   decreaseQty(product: any){
     if (product.qty === 0){
       product.qty = 0
@@ -89,12 +97,14 @@ export class MenuComponent {
     }
   }
 
+  // Guarda el valor del input del nombre de cliente con evento blur
   addClientName(event: Event) {
     const element = event.target as HTMLInputElement;
     this.order.client= element.value;
     console.log(this.order.client)
   }
 
+  // Fx agrega fecha y hora a la orden y agrega array de productsSelected a los productos de la orden
   createOrder(){
     this.order.dataEntry = new Date().toLocaleString();
     this.order.products.push(this.productsSelected);

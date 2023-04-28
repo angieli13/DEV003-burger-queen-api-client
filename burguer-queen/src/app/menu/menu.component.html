@@ -89,7 +89,7 @@
           <li *ngFor="let productSelected of productsSelected">
             {{productSelected.product.name }} - Precio: {{ productSelected.product.price }}
             <button class="btn" (click)="decreaseQty(productSelected)">-</button>
-            <button class="btn" (click)="addQty(productSelected)">+</button>
+            <button class="btn" (click)="increaseQty(productSelected)">+</button>
 
           </li>
         </ul>
