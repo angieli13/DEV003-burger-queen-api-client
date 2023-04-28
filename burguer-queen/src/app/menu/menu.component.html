@@ -1,4 +1,4 @@
-<!--====================  Imagenes logo y menú hamburguesa ==================== -->
+<!--======================================   Imagenes logo y menú hamburguesa ======================================  -->
 <div class="row row-estilo1 m-2 justify-content-start align-items-center">
   <div class="col">
     <img class="logo-img" src="../assets/images/logoBQ-horizontal.png">
@@ -19,7 +19,7 @@
   </div>
 </div>
 
-<!--====================  Aquí los dos contenedores ==================== -->
+<!--======================================   Aquí los dos contenedores ======================================  -->
 <div class="row row-estilo2 m-2">
   <div class="col-md-6 col-primerContainer mx-3">
     <!-- Contenido de la primera columna -->
@@ -28,26 +28,25 @@
         <label for="name" class="texto" style="margin-right: 10px;">Cliente: </label>
         <input class="cliente" type="text" placeholder="Escribe el nombre del cliente" name="name" required />
       </div>
-      <!-- ==================== navbar menú ==================== -->
-<div class="col col-navbar">
-  <nav class="navbar navbar-expand-lg ">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <button class="filter-btn py-1 px-4" (click)="showCard('Todo')">Todo</button>
-      </li>
-      <li class="nav-item mx-2">
-        <button class="filter-btn py-1 px-3" (click)="showCard('Desayuno')">Desayuno</button>
-      </li>
-      <li class="nav-item mx-2">
-        <button class="filter-btn py-1 px-3" (click)="showCard('Almuerzo')">Comidas</button>
-      </li>
-      <li class="nav-item mx-2">
-        <button class="filter-btn py-1 px-3" (click)="showCard('Bebida')">Bebidas</button>
-      </li>
-    </ul>
-  </nav>
-
-  <div class="container-card mt-4 " *ngIf="cardVisible">
+      <!-- ====================================== navbar menú ====================================== -->
+      <div class="col col-navbar">
+        <nav class="navbar navbar-expand-lg ">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <button class="filter-btn py-1 px-4" (click)="showCard('Todo')">Todo</button>
+            </li>
+            <li class="nav-item mx-2">
+              <button class="filter-btn py-1 px-3" (click)="showCard('Desayuno')">Desayuno</button>
+            </li>
+            <li class="nav-item mx-2">
+              <button class="filter-btn py-1 px-3" (click)="showCard('Almuerzo')">Comidas</button>
+            </li>
+            <li class="nav-item mx-2">
+              <button class="filter-btn py-1 px-3" (click)="showCard('Bebida')">Bebidas</button>
+            </li>
+          </ul>
+        </nav>
+        <div class="container-card mt-4 " *ngIf="cardVisible">
           <div class="row">
             <div class="col col-card">
               <div class="card">
@@ -60,9 +59,9 @@
                       </div>
                       <div class="col-md-8 ">
                         <div class="card-body">
-                          <h5 class="card-title">{{ product.name }}</h5>
+                          <h1 class="card-title">{{ product.name }}</h1>
                           <p class="card-price">Precio: {{ product.price }}</p>
-                          <button class="btn" value="+">+</button>
+                          <button class="btn" (click)="addProductToOrder(product)">+</button>
                         </div>
                       </div>
                     </div>
@@ -73,7 +72,6 @@
           </div>
         </div>
       </div>
-
     </div>
   </div>
   <!-- Contenido de la segunda columna -->
@@ -83,8 +81,18 @@
       <div class=" col-orden ">
         Lista de ordenes
       </div>
+
       <!-- Segundo contenedor -->
       <div class="col-aparecenLasO">
+        <h2> Productos seleccionados:</h2>
+        <ul>
+          <li *ngFor="let productSelected of productsSelected">
+            {{productSelected.name }} - Precio: {{ productSelected.price }}
+            <button class="btn">-</button>
+            <button class="btn">+</button>
+
+          </li>
+        </ul>
       </div>
 
       <!-- Tercer contenedor -->
