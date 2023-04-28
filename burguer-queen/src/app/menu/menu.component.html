@@ -25,6 +25,7 @@
     <!-- Contenido de la primera columna -->
     <div class="col m-2">
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
       <div class="col mx-auto d-block text-center">
@@ -32,6 +33,8 @@
         <input class="cliente" type="text" placeholder="Escribe el nombre del cliente" [value]="order.client" (blur)="addClientName($event)" name="name" required />
       </div>
 >>>>>>> d74a253efe3f60b1b4879309eaf0f2305562ecde
+=======
+>>>>>>> c6b5142d815960cf23fa055a0b9a2155f2c5eff8
       <!-- ====================================== navbar menú ====================================== -->
       <div class="col col-navbar">
         <nav class="navbar navbar-expand-lg ">
@@ -71,6 +74,9 @@
   </div>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> c6b5142d815960cf23fa055a0b9a2155f2c5eff8
 <!-- Contenido de la segunda columna -->
 <div class="col-md-5 mx-3 col-segundaC">
   <div class="row row-contenedores">
@@ -82,6 +88,7 @@
       <label for="name" class="texto" style="margin-right: 10px;">Cliente: </label>
       <input class="cliente" [value]="order.client" (blur)="addClientName($event)" type="text" placeholder="Escribe el nombre del cliente" name="name" required />
     </div>
+<<<<<<< HEAD
 =======
       <!-- Segundo contenedor -->
       <div class="col-aparecenLasO">
@@ -92,6 +99,8 @@
             <button class="btn" (click)="decreaseQty(productSelected)">-</button>
             <button class="btn" (click)="increaseQty(productSelected)">+</button>
 >>>>>>> d74a253efe3f60b1b4879309eaf0f2305562ecde
+=======
+>>>>>>> c6b5142d815960cf23fa055a0b9a2155f2c5eff8
 
     <!-- Segundo contenedor -->
     <div class="col-aparecenLasO">
@@ -99,9 +108,14 @@
         <li *ngFor="let productSelected of productsSelected">
           {{productSelected.product.name }} - Precio: {{ productSelected.product.price }}
           <button class="btn" (click)="decreaseQty(productSelected)">-</button>
+<<<<<<< HEAD
           <button class="btn" (click)="addQty(productSelected)">+</button>
 
 <<<<<<< HEAD
+=======
+          <button class="btn" (click)="increaseQty(productSelected)">+</button>
+
+>>>>>>> c6b5142d815960cf23fa055a0b9a2155f2c5eff8
         </li>
       </ul>
     </div>
@@ -112,6 +126,7 @@
         <label for="name" class="Total">Total: </label>
         <input class="Total-input form-control" type="text" />
         <button class="btn-crearPedido" (click)="createOrder()">Crear pedido</button>
+<<<<<<< HEAD
 =======
       <!-- Tercer contenedor -->
       <div class="col mx-auto d-block text-center">
@@ -121,6 +136,8 @@
           <button class="btn-crearPedido" (click)="createOrder()">Crear pedido</button>
         </div>
 >>>>>>> d74a253efe3f60b1b4879309eaf0f2305562ecde
+=======
+>>>>>>> c6b5142d815960cf23fa055a0b9a2155f2c5eff8
       </div>
     </div>
   </div>
