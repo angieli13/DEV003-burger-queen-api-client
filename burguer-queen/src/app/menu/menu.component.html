@@ -24,10 +24,6 @@
   <div class="col-md-6 col-primerContainer mx-3">
     <!-- Contenido de la primera columna -->
     <div class="col m-2">
-      <div class="col mx-auto d-block text-center">
-        <label for="name" class="texto" style="margin-right: 10px;">Cliente: </label>
-        <input class="cliente" type="text" placeholder="Escribe el nombre del cliente" [value]="order.client" (blur)="addClientName($event)" name="name" required />
-      </div>
       <!-- ====================================== navbar menú ====================================== -->
       <div class="col col-navbar">
         <nav class="navbar navbar-expand-lg ">
@@ -46,63 +42,58 @@
             </li>
           </ul>
         </nav>
+
         <div class="container-card mt-4 " *ngIf="cardVisible">
-          <div class="row">
-            <div class="col col-card">
-              <div class="card">
-                <ul>
-                  <li *ngFor="let product of products">
-                    <div class="row">
-                      <div class="col-md-4">
-                        <!-- Aquí se muestra la imagen en la tarjeta -->
-                        <img src="{{ product.image }}" alt="{{ product.name }}" class="card-img">
-                      </div>
-                      <div class="col-md-8 ">
-                        <div class="card-body">
-                          <h1 class="card-title">{{ product.name }}</h1>
-                          <p class="card-price">Precio: {{ product.price }}</p>
-                          <button class="btn" (click)="addProductToOrder(product)">+</button>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
+          <div class="card-columns">
+            <div class="card" *ngFor="let product of products">
+              <div class="card-body d-flex align-items-center ">
+                <img src="{{ product.image }}" alt="{{ product.name }}" class="card-img">
+                <div class="title-price">
+                  <h1 class="card-title">{{ product.name }}</h1>
+                  <p class="card-price">Precio: {{ product.price }}</p>
+                </div>
+                <button class="btn" (click)="addProductToOrder(product)">+</button>
               </div>
             </div>
           </div>
         </div>
+
       </div>
     </div>
   </div>
-  <!-- Contenido de la segunda columna -->
-  <div class="col-md-5 mx-3 col-segundaC">
-    <div class="row row-contenedores">
-      <!-- Primer contenedor -->
-      <div class=" col-orden ">
-        Lista de ordenes
-      </div>
 
-      <!-- Segundo contenedor -->
-      <div class="col-aparecenLasO">
-        <h2> Productos seleccionados:</h2>
-        <ul>
-          <li *ngFor="let productSelected of productsSelected">
-            {{productSelected.product.name }} - Precio: {{ productSelected.product.price }}
-            <button class="btn" (click)="decreaseQty(productSelected)">-</button>
-            <button class="btn" (click)="increaseQty(productSelected)">+</button>
+<!-- Contenido de la segunda columna -->
+<div class="col-md-5 mx-3 col-segundaC">
+  <div class="row row-contenedores">
+    <!-- Primer contenedor -->
+    <div class=" col-orden ">
+      Lista de ordenes
+    </div>
+    <div class="col mx-auto d-block text-center">
+      <label for="name" class="texto" style="margin-right: 10px;">Cliente: </label>
+      <input class="cliente" [value]="order.client" (blur)="addClientName($event)" type="text" placeholder="Escribe el nombre del cliente" name="name" required />
+    </div>
 
-          </li>
-        </ul>
-      </div>
+    <!-- Segundo contenedor -->
+    <div class="col-aparecenLasO">
+      <ul>
+        <li *ngFor="let productSelected of productsSelected">
+          {{productSelected.product.name }} - Precio: {{ productSelected.product.price }}
+          <button class="btn" (click)="decreaseQty(productSelected)">-</button>
+          <button class="btn" (click)="increaseQty(productSelected)">+</button>
 
-      <!-- Tercer contenedor -->
-      <div class="col mx-auto d-block text-center">
-        <div class="d-flex align-items-center justify-content-center">
-          <label for="name" class="Total">Total: </label>
-          <input class="Total-input form-control" type="text" />
-          <button class="btn-crearPedido" (click)="createOrder()">Crear pedido</button>
-        </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Tercer contenedor -->
+    <div class="col mx-auto d-block text-center">
+      <div class="d-flex align-items-center justify-content-center">
+        <label for="name" class="Total">Total: </label>
+        <input class="Total-input form-control" type="text" />
+        <button class="btn-crearPedido" (click)="createOrder()">Crear pedido</button>
       </div>
     </div>
   </div>
+</div>
 </div>

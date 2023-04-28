@@ -1,0 +1,43 @@
+//====================  Fuentes ====================//
+
+/*@font-face {
+  font-family: montserratM;
+  src: url(../fonts/Montserrat-Medium.otf);
+}
+
+@font-face {
+  font-family: montserratL;
+  src: url(../fonts/Montserrat-Light.otf);
+}
+
+@font-face {
+  font-family: caviarD;
+  src: url(../fonts/CaviarDreams_Bold.ttf);
+}
+
+@font-face {
+  font-family: caviar;
+  src: url(../fonts/CaviarDreams.ttf);
+}*/
+.texto {
+  font-family: montserratL;
+
+}
+.btn {
+
+  border: none;
+  outline: none;
+  font-family: caviarD;
+  color: #000;
+}
+.btn {
+  transition: transform 0.3s ease-in-out; /* Transición  para el efecto de hundimiento */
+}
+
+.btn:hover {
+  transform: scale(0.9); /* Escala la imagen al 90% del tamaño original */
+}
+
+.btn:active {
+  transform: scale(0.8); /* Escala la imagen al 80% del tamaño original al hacer clic */
+}
