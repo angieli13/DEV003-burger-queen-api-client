@@ -26,7 +26,7 @@
     <div class="col m-2">
       <div class="col mx-auto d-block text-center">
         <label for="name" class="texto" style="margin-right: 10px;">Cliente: </label>
-        <input class="cliente" type="text" placeholder="Escribe el nombre del cliente" name="name" required />
+        <input class="cliente" type="text" placeholder="Escribe el nombre del cliente" [value]="order.client" (blur)="addClientName($event)" name="name" required />
       </div>
       <!-- ====================================== navbar menú ====================================== -->
       <div class="col col-navbar">
@@ -87,9 +87,9 @@
         <h2> Productos seleccionados:</h2>
         <ul>
           <li *ngFor="let productSelected of productsSelected">
-            {{productSelected.name }} - Precio: {{ productSelected.price }}
-            <button class="btn">-</button>
-            <button class="btn">+</button>
+            {{productSelected.product.name }} - Precio: {{ productSelected.product.price }}
+            <button class="btn" (click)="decreaseQty(productSelected)">-</button>
+            <button class="btn" (click)="addQty(productSelected)">+</button>
 
           </li>
         </ul>
@@ -100,7 +100,7 @@
         <div class="d-flex align-items-center justify-content-center">
           <label for="name" class="Total">Total: </label>
           <input class="Total-input form-control" type="text" />
-          <button class="btn-crearPedido">Crear pedido</button>
+          <button class="btn-crearPedido" (click)="createOrder()">Crear pedido</button>
         </div>
       </div>
     </div>

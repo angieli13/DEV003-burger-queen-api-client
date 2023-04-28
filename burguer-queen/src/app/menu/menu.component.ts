@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ApiBQService } from '../services/api-bq.service';
 import { Router } from '@angular/router';
 import { LoginComponent } from '../login/login.component';
+import { OrderProductI } from '../interfaces/order-product-i';
 
 @Component({
   selector: 'app-menu',
@@ -19,18 +20,14 @@ export class MenuComponent {
   allProducts: any[] = []; // para almacenar todos los productos
   products: any[] = []; // para almacenar los productos que se obtienen del servicio api.getMenu
   productsSelected: any[] = []; // para almacenar los productos seleccionados
-  order:any = {
-    client: "nombre",
-    products: [
-      {
-      qty: 0,
-      product: {
 
-      }
-      }
+  order:any = {
+    client: "",
+    products: [
+
     ],
     status: "pending",
-    dataEntry: "1996-12-06 16:20"
+    dataEntry: "1996-12-06 05:20"
   }
 
   constructor(private api: ApiBQService, private router: Router) {
@@ -58,14 +55,51 @@ export class MenuComponent {
     console.log(this.products)
   }
 
+  // addProductToOrder(product: any) {
+  //   this.productsSelectede.push(product);
+  //   this.order.products.push(product);
+  //   console.log(this.order.products)
+  // }
+
   addProductToOrder(product: any) {
-    this.productsSelected.push(product);
-    this.order.products.push(product);
-    console.log(this.order.products)
+    const addProduct = {
+      qty: 1,
+      product: {
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        image: product.image,
+        type: product.type,
+        dateEntry: product.dateEntry
+      }
+    };
+
+    this.productsSelected.push(addProduct);
   }
 
+  addQty(product: any){
+    product.qty += 1;
+  }
 
+  decreaseQty(product: any){
+    if (product.qty === 0){
+      product.qty = 0
+    } else {
+      product.qty -= 1
+    }
+  }
 
+  addClientName(event: Event) {
+    const element = event.target as HTMLInputElement;
+    this.order.client= element.value;
+    console.log(this.order.client)
+  }
+
+  createOrder(){
+    this.order.dataEntry = new Date().toLocaleString();
+    this.order.products.push(this.productsSelected);
+    console.log(this.order);
+  }
 
   //====================================== menú hamburguesa ======================================//
 
