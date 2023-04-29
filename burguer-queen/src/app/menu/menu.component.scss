@@ -75,21 +75,10 @@
 .texto {
   font-family: caviarD;
 }
-.cliente {
-  background: #FDE293;
-  opacity: 10;
-  border-radius: 10px;
-  width: 80%;
-}
-.cliente::placeholder {
-  text-align: center;
-  font-family: montserratL;
-}
-
 .navbar-expand-lg {
   background-color: #EA8D6F;
   border-radius: 20px;
-  margin-top: 3%;
+  margin-top: 1%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -108,62 +97,97 @@
   opacity: 10;
   border-radius: 10px;
 }
-
-
 .card {
   height: 100%;
   display: flex;
-  align-items: center;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  margin-left: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Agrega una sombra a la tarjeta */
   transition: box-shadow 0.3s ease-in-out; /* Agrega una transición suave a la sombra */
+  flex: 1 1 300px;
 }
-
 .card:hover {
   transform: rotateY(10deg);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Cambia la sombra al hacer hover */
 }
+
+.card-columns {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .card ul {
   list-style: none; /* Elimina las viñetas o puntos */
   padding: 0; /* Elimina el espacio de relleno */
   margin: 0; /* Elimina los márgenes */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Agrega una sombra a la tarjeta */
+  transition: box-shadow 0.3s ease-in-out; /* Agrega una transición suave a la sombra */
+}
+.card ul:hover {
+  transform: rotateY(10deg);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Cambia la sombra al hacer hover */
 }
 .card-img {
   background-color: #FDE293;
-  margin-top: 10%;
   border-radius: 10px;
-  height: 130px;
+  height: 130px ;
   width: 150px;
 }
 
 .card-title {
-  margin-top: 20px;
+  margin-left: 30px;
+  margin-left: 30px;
   font-family: montserratM;
+  background-color: blueviolet;
 }
 .card-price {
   font-family: montserratL;
+  margin-left: 30px;
+  margin-left: 30px;
+  background-color: aquamarine;
 }
 .btn {
-  margin-left: 300px;
+
   background-color: #EA8D6F;
   border-radius: 25px;
 }
 .container-card {
-  max-height: 400px; /* Puedes ajustar este valor según tus necesidades */
-  overflow-y: auto; /* Añade una barra de desplazamiento vertical si el contenido excede la altura máxima */
+  max-height: 450px;
+  overflow-y: auto; /* Añade scrollbar */
+  overflow-x: hidden;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+  border-radius: 25px;
+  background-color: aqua;
 }
+
+
 // Segundo contenedor
 .col-segundaC {
   background-color: #fde293;
   opacity: 9;
   border-radius: 25px;
   box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+  height: 530px;
+}
+
+.cliente {
+  background: #FDE293;
+  opacity: 10;
+  border-radius: 10px;
+  width: 60%;
+  margin-top: 30px;
+}
+.cliente::placeholder {
+  text-align: center;
+  font-family: montserratL;
 }
 .col-orden {
   margin-top: 20px;
   margin-left: 15%;
   background-color: #EA8D6F;
   border-radius: 15px;
-  height: 40px;
+  height: 25px;
   width: 70%;
   font-family: caviarD;
   display: flex;
@@ -172,11 +196,10 @@
 }
 
 .col-aparecenLasO {
-  height: 430px;
+  height: 350px;
   display: flex;
   align-items: center;
   background-color: #fde293;
-
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 

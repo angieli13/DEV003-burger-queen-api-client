@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ApiBQService } from '../services/api-bq.service';
 import { Router } from '@angular/router';
 import { LoginComponent } from '../login/login.component';
+import { OrderProductI } from '../interfaces/order-product-i';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-menu',
@@ -9,100 +11,113 @@ import { LoginComponent } from '../login/login.component';
   styleUrls: ['./menu.component.scss']
 })
 
-
+//====================================== navbar menú ======================================//
 export class MenuComponent {
 
-  cardVisible = true;
-  cardTitle = '';
-  cardPrice = '';
-  cardImage = '';
-  products: any[] = [];//para almacenar los productos que se obtienen del servicio api.getMenu
+  //se utiliza para encapsular y gestionar la lógica de validación y estado de un formulario
+  clientOrder = new FormGroup({
+    clientName : new FormControl('',Validators.required)
+  })
 
-  // loading = true;
-
+  // Para cargar los productos desde la API
   constructor(private api: ApiBQService, private router: Router) {
     this.loadProducts();
   }
 
-  loadProducts() {
-    this.api.getMenu()
-    .subscribe({
-      next: (data: any) => {
-        console.log(data);
-        this.products = data;
-        // this.loading = false;
-        console.log(this.products);
+  // almacena todos los productos (get http)
+  allProducts: any[] = [];
 
+  // almacena productos segun filtro
+  products: any[] = [];
+
+  // almacena productos seleccionados según estructura de la orden OrderProductI
+  productsSelected: any[] = [];
+
+  // La suma del total de productos
+  bill:number = 0;
+
+  // Estuctura de la orden para crear pedido http post
+  order:any = {
+    client: "",
+    status: "pending",
+    dataEntry: "",
+    products: [],
+  }
+
+  loadProducts() {
+    this.api.getMenu() // Trae funcion del servicio api (get http)
+    .subscribe({ // "inicia" el flujo observable, para gestionar los resultados de la llamada asíncrona de getMenu
+      next: (data: any) => {
+        this.allProducts = data;
+        this.products = data;
       }
     });
   }
 
+  // Muestra tarjetas de productos según filtros
   showCard(productType: string) {
-    // if (!this.loading) {
-     //console.log('hola soy linea 42')
-      console.log(productType)
-      this.products = this.products.filter(product => product.type === productType);
-      console.log(this.products)
-
-      // if (filteredProducts.length > 0) {
-      //   const product = filteredProducts[0];
-      //   this.cardTitle = product.name;
-      //   this.cardPrice = '$' + product.price;
-      //   this.cardImage = product.image;
-      //   this.cardVisible = true;
-      // } else {
-      //   this.cardVisible = false;
-      // }
+    if (productType === 'Todo') {
+      this.products = this.allProducts;
+    } else {
+      this.products = this.allProducts.filter(product => product.type === productType);
     }
+  }
 
-//   showCard(productType: string) {
-//     // if (!this.loading) {
-//       const filteredProducts = this.products.filter(product => product.type === productType);
+  // Crea estructura de los productos seleccionados con el formato para orden y los agrega al array productsSelected
+  addProductToOrder(product: any) {
+    const addProduct = {
+      qty: 1,
+      product: {
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        image: product.image,
+        type: product.type,
+        dateEntry: product.dateEntry
+      }
+    };
 
-//       if (filteredProducts.length > 0) {
-//         const product = filteredProducts[0];
-//         this.cardTitle = product.name;
-//         this.cardPrice = '$' + product.price;
-//         this.cardImage = product.image;
-//         this.cardVisible = true;
-//       } else {
-//         this.cardVisible = false;
-//       }
-//     }
-//   //}
+    this.bill += 1 * product.price;
+    this.order.products.push(addProduct);
+  }
 
+  // Incrementa cantidad de productos
+  increaseQty(product: OrderProductI) {
+    product.qty ++;
+    this.bill += product.product.price;
+  }
 
+  // Disminuye cantidad de productos
+  decreaseQty(product: OrderProductI){
+    if (product.qty === 0) {
+      product.qty = 0
+    } else {
+      product.qty --;
+      this.bill -= product.product.price
+    }
+  }
 
-  // showCard(category: string) {
-  //   switch (category) {
-  //     case 'todo':
-  //       this.cardTitle = 'Sandwich de jamón y queso';
-  //       this.cardPrice = '$5.99';
-  //       this.cardImage = '../assets/images/sandwich.png';
-  //       break;
-  //     case 'desayuno':
-  //       this.cardTitle = 'Jugo';
-  //       this.cardPrice = '$1.99';
-  //       this.cardImage = '../assets/images/jugo.png';
-  //       break;
-  //     case 'comidas':
-  //       this.cardTitle = 'Hamburguesa simple';
-  //       this.cardPrice = '$4.99';
-  //       this.cardImage = '../assets/images/hamburguesa.png';
-  //       break;
-  //     case 'bebidas':
-  //       this.cardTitle = 'Agua 500ml';
-  //       this.cardPrice = '$1.00';
-  //       this.cardImage = '../assets/images/agua.png';
-  //       break;
-  //     default:
-  //       this.cardTitle = '';
-  //       this.cardPrice = '';
-  //       break;
-  //   }
-  //   this.cardVisible = true;
-  // }
-  //=============== menú hamburguesa ===============//
+  // Guarda el valor del input del nombre de cliente con evento blur
+  addClientName(event: Event) {
+    const element = event.target as HTMLInputElement;
+    this.order.client= element.value;
+  }
+
+  postOrder(order:any){
+    this.api.saveOrder(order).subscribe({
+      next: (data: any) => {
+        console.log(data);
+      }
+    })
+  }
+
+  // Fx agrega fecha y hora a la orden y agrega array de productsSelected a los productos de la orden
+  createOrder(){
+    this.order.dataEntry = new Date().toLocaleString();
+    this.postOrder(this.order)
+  }
+
+  //====================================== menú hamburguesa ======================================//
 
   mostrarMenuDesplegable = false; // Variable para controlar la visibilidad del menú desplegable
 
@@ -131,3 +146,4 @@ export class MenuComponent {
   }
 
 }
+

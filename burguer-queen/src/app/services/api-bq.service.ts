@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { LoginI } from '../interfaces/login.interface';
 import { ResponseI } from '../interfaces/response.interface';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs';//un observable es un flujo de eventos o datos
 
 @Injectable({
   providedIn: 'root'
@@ -23,8 +23,15 @@ export class ApiBQService {
     let token = sessionStorage.getItem('token')
     let menuUrl = this.url + 'products'
     let productHeader = new HttpHeaders().set('Authorization', 'Bearer ' + token)
-    console.log(productHeader);
 
     return this.http.get<any>(menuUrl,{'headers': productHeader})
+  }
+
+
+  saveOrder(order:any):Observable<any>{
+    let token = sessionStorage.getItem('token')
+    let productHeader = new HttpHeaders().set('Authorization', 'Bearer ' + token)
+    let orderUrl = this.url + 'orders'
+    return this.http.post<any>(orderUrl, order, {'headers': productHeader})
   }
 }

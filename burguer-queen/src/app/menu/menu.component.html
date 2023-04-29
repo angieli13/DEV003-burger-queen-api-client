@@ -1,4 +1,4 @@
-<!--====================  Imagenes logo y menú hamburguesa ==================== -->
+<!--======================================   Imagenes logo y menú hamburguesa ======================================  -->
 <div class="row row-estilo1 m-2 justify-content-start align-items-center">
   <div class="col">
     <img class="logo-img" src="../assets/images/logoBQ-horizontal.png">
@@ -19,82 +19,90 @@
   </div>
 </div>
 
-<!--====================  Aquí los dos contenedores ==================== -->
+<!--======================================   Aquí los dos contenedores ======================================  -->
 <div class="row row-estilo2 m-2">
   <div class="col-md-6 col-primerContainer mx-3">
     <!-- Contenido de la primera columna -->
     <div class="col m-2">
-      <div class="col mx-auto d-block text-center">
-        <label for="name" class="texto" style="margin-right: 10px;">Cliente: </label>
-        <input class="cliente" type="text" placeholder="Escribe el nombre del cliente" name="name" required />
-      </div>
-      <!-- ==================== navbar menú ==================== -->
-<div class="col col-navbar">
-  <nav class="navbar navbar-expand-lg ">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <button class="filter-btn py-1 px-4" (click)="showCard('Todo')">Todo</button>
-      </li>
-      <li class="nav-item mx-2">
-        <button class="filter-btn py-1 px-3" (click)="showCard('Desayuno')">Desayuno</button>
-      </li>
-      <li class="nav-item mx-2">
-        <button class="filter-btn py-1 px-3" (click)="showCard('Almuerzo')">Comidas</button>
-      </li>
-      <li class="nav-item mx-2">
-        <button class="filter-btn py-1 px-3" (click)="showCard('Bebida')">Bebidas</button>
-      </li>
-    </ul>
-  </nav>
+      <!-- ====================================== navbar menú ====================================== -->
+      <div class="col col-navbar">
+        <nav class="navbar navbar-expand-lg ">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <button class="filter-btn py-1 px-4" (click)="showCard('Todo')">Todo</button>
+            </li>
+            <li class="nav-item mx-2">
+              <button class="filter-btn py-1 px-3" (click)="showCard('Desayuno')">Desayuno</button>
+            </li>
+            <li class="nav-item mx-2">
+              <button class="filter-btn py-1 px-3" (click)="showCard('Almuerzo')">Comidas</button>
+            </li>
+            <li class="nav-item mx-2">
+              <button class="filter-btn py-1 px-3" (click)="showCard('Bebida')">Bebidas</button>
+            </li>
+          </ul>
+        </nav>
 
-  <div class="container-card mt-4 " *ngIf="cardVisible">
-          <div class="row">
-            <div class="col col-card">
-              <div class="card">
-                <ul>
-                  <li *ngFor="let product of products">
-                    <div class="row">
-                      <div class="col-md-4">
-                        <!-- Aquí se muestra la imagen en la tarjeta -->
-                        <img src="{{ product.image }}" alt="{{ product.name }}" class="card-img">
-                      </div>
-                      <div class="col-md-8 ">
-                        <div class="card-body">
-                          <h5 class="card-title">{{ product.name }}</h5>
-                          <p class="card-price">Precio: {{ product.price }}</p>
-                          <button class="btn" value="+">+</button>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
+        <div class="container-card mt-4 ">
+          <div class="card-columns">
+            <div class="card" *ngFor="let product of products">
+              <div class="card-body d-flex align-items-center ">
+                <div class="col-md-4">
+                <img src="{{ product.image }}" alt="{{ product.name }}" class="card-img">
+                </div>
+                <div class="col-md-6">
+                  <div class="title-price">
+                    <h1 class="card-title">{{ product.name }}</h1>
+                    <p class="card-price">Precio: {{ product.price }}</p>
+                  </div>
+                </div>
+                <div class="col-md-2 d-flex align-items-center justify-content-center">
+                <button class="btn" (click)="addProductToOrder(product)">+</button>
+              </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
+      </div>
     </div>
   </div>
-  <!-- Contenido de la segunda columna -->
-  <div class="col-md-5 mx-3 col-segundaC">
-    <div class="row row-contenedores">
-      <!-- Primer contenedor -->
-      <div class=" col-orden ">
-        Lista de ordenes
+
+<!-- Contenido de la segunda columna -->
+<div class="col-md-5 mx-3 col-segundaC">
+  <div class="row row-contenedores">
+    <!-- Primer contenedor -->
+    <div class=" col-orden ">
+      Lista de ordenes
+    </div>
+
+    <form [formGroup]="clientOrder" (ngSubmit)="createOrder()">
+      <div class="col mx-auto d-block text-center">
+        <label for="name" class="texto" style="margin-right: 10px;">Cliente: </label>
+        <input class="cliente" formControlName="clientName" [value]="order.client" (blur)="addClientName($event)" type="text" placeholder="Escribe el nombre del cliente" name="clientName"/>
       </div>
+
       <!-- Segundo contenedor -->
       <div class="col-aparecenLasO">
+        <ul>
+          <li *ngFor="let product of this.order.products">
+            {{product.product.name }} - Precio: {{ product.product.price }}
+            <button class="btn" (click)="decreaseQty(product)">-</button>
+            <p>{{product.qty}}</p>
+            <button class="btn" (click)="increaseQty(product)">+</button>
+
+          </li>
+        </ul>
       </div>
 
       <!-- Tercer contenedor -->
       <div class="col mx-auto d-block text-center">
         <div class="d-flex align-items-center justify-content-center">
-          <label for="name" class="Total">Total: </label>
-          <input class="Total-input form-control" type="text" />
-          <button class="btn-crearPedido">Crear pedido</button>
+          <p>Total: {{bill | currency: '$ '}}</p>
+          <button type="submit" class="btn-crearPedido" [disabled]="clientOrder.invalid">Crear pedido</button>
         </div>
       </div>
-    </div>
+    </form>
   </div>
+</div>
 </div>
