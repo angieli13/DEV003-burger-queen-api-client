@@ -43,7 +43,7 @@
           </ul>
         </nav>
 
-        <div class="container-card mt-4 " *ngIf="cardVisible">
+        <div class="container-card mt-4 ">
           <div class="card-columns">
             <div class="card" *ngFor="let product of products">
               <div class="card-body d-flex align-items-center ">
@@ -75,31 +75,34 @@
     <div class=" col-orden ">
       Lista de ordenes
     </div>
-    <div class="col mx-auto d-block text-center">
-      <label for="name" class="texto" style="margin-right: 10px;">Cliente: </label>
-      <input class="cliente" [value]="order.client" (blur)="addClientName($event)" type="text" placeholder="Escribe el nombre del cliente" name="name" required />
-    </div>
 
-    <!-- Segundo contenedor -->
-    <div class="col-aparecenLasO">
-      <ul>
-        <li *ngFor="let productSelected of productsSelected">
-          {{productSelected.product.name }} - Precio: {{ productSelected.product.price }}
-          <button class="btn" (click)="decreaseQty(productSelected)">-</button>
-          <p>{{productSelected.qty}}</p>
-          <button class="btn" (click)="increaseQty(productSelected)">+</button>
-
-        </li>
-      </ul>
-    </div>
-
-    <!-- Tercer contenedor -->
-    <div class="col mx-auto d-block text-center">
-      <div class="d-flex align-items-center justify-content-center">
-        <p>Total: {{bill}}</p>
-        <button class="btn-crearPedido" (click)="createOrder()">Crear pedido</button>
+    <form [formGroup]="clientOrder" (ngSubmit)="createOrder()">
+      <div class="col mx-auto d-block text-center">
+        <label for="name" class="texto" style="margin-right: 10px;">Cliente: </label>
+        <input class="cliente" formControlName="clientName" [value]="order.client" (blur)="addClientName($event)" type="text" placeholder="Escribe el nombre del cliente" name="clientName"/>
       </div>
-    </div>
+
+      <!-- Segundo contenedor -->
+      <div class="col-aparecenLasO">
+        <ul>
+          <li *ngFor="let product of this.order.products">
+            {{product.product.name }} - Precio: {{ product.product.price }}
+            <button class="btn" (click)="decreaseQty(product)">-</button>
+            <p>{{product.qty}}</p>
+            <button class="btn" (click)="increaseQty(product)">+</button>
+
+          </li>
+        </ul>
+      </div>
+
+      <!-- Tercer contenedor -->
+      <div class="col mx-auto d-block text-center">
+        <div class="d-flex align-items-center justify-content-center">
+          <p>Total: {{bill | currency: '$ '}}</p>
+          <button type="submit" class="btn-crearPedido" [disabled]="clientOrder.invalid">Crear pedido</button>
+        </div>
+      </div>
+    </form>
   </div>
 </div>
 </div>

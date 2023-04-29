@@ -3,6 +3,7 @@ import { ApiBQService } from '../services/api-bq.service';
 import { Router } from '@angular/router';
 import { LoginComponent } from '../login/login.component';
 import { OrderProductI } from '../interfaces/order-product-i';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-menu',
@@ -13,56 +14,56 @@ import { OrderProductI } from '../interfaces/order-product-i';
 //====================================== navbar menú ======================================//
 export class MenuComponent {
 
-  cardVisible = true;
-  cardTitle = '';
-  cardPrice = '';
-  cardImage = '';
-  allProducts: any[] = []; // para almacenar todos los productos
-  products: any[] = []; // para almacenar los productos que se obtienen del servicio api.getMenu
-  productsSelected: any[] = []; // para almacenar los productos seleccionados y luego agregarlos a la orden
-  bill:number = 0;
+  //se utiliza para encapsular y gestionar la lógica de validación y estado de un formulario
+  clientOrder = new FormGroup({
+    clientName : new FormControl('',Validators.required)
+  })
 
-  order:any = {
-    client: "",
-    products: [
-
-    ],
-    status: "pending",
-    dataEntry: ""
+  // Para cargar los productos desde la API
+  constructor(private api: ApiBQService, private router: Router) {
+    this.loadProducts();
   }
 
-  constructor(private api: ApiBQService, private router: Router) {
-    this.loadProducts(); /*para cargar los productos desde la API*/
+  // almacena todos los productos (get http)
+  allProducts: any[] = [];
+
+  // almacena productos segun filtro
+  products: any[] = [];
+
+  // almacena productos seleccionados según estructura de la orden OrderProductI
+  productsSelected: any[] = [];
+
+  // La suma del total de productos
+  bill:number = 0;
+
+  // Estuctura de la orden para crear pedido http post
+  order:any = {
+    client: "",
+    status: "pending",
+    dataEntry: "",
+    products: [],
   }
 
   loadProducts() {
-    this.api.getMenu() /*Para obtener los datos de productos*/
-    .subscribe({ /*"inicia" el flujo observable, para observar los resultados de la llamada asíncrona de getMenu*/
+    this.api.getMenu() // Trae funcion del servicio api (get http)
+    .subscribe({ // "inicia" el flujo observable, para gestionar los resultados de la llamada asíncrona de getMenu
       next: (data: any) => {
-        console.log(data);
         this.allProducts = data;
         this.products = data;
-        console.log(this.allProducts);
       }
     });
   }
+
+  // Muestra tarjetas de productos según filtros
   showCard(productType: string) {
-    console.log(productType)
     if (productType === 'Todo') {
       this.products = this.allProducts;
     } else {
       this.products = this.allProducts.filter(product => product.type === productType);
     }
-    console.log(this.products)
   }
 
-  // addProductToOrder(product: any) {
-  //   this.productsSelectede.push(product);
-  //   this.order.products.push(product);
-  //   console.log(this.order.products)
-  // }
-
-  // Fx que crea estructura con el dato de los productos seleccionados y los agrega al array productsSelected
+  // Crea estructura de los productos seleccionados con el formato para orden y los agrega al array productsSelected
   addProductToOrder(product: any) {
     const addProduct = {
       qty: 1,
@@ -77,28 +78,22 @@ export class MenuComponent {
     };
 
     this.bill += 1 * product.price;
-    console.log(this.bill);
-
-
-    this.productsSelected.push(addProduct);
+    this.order.products.push(addProduct);
   }
 
-  // Fx de botón + de order list que agrega cantidad de productos
+  // Incrementa cantidad de productos
   increaseQty(product: OrderProductI) {
-    product.qty++;
+    product.qty ++;
     this.bill += product.product.price;
-      }
+  }
 
-
-
-  // Fx de botón - de order list que disminuye cantidad de productos
+  // Disminuye cantidad de productos
   decreaseQty(product: OrderProductI){
-    if (product.qty === 0){
+    if (product.qty === 0) {
       product.qty = 0
-
     } else {
       product.qty --;
-      this.bill -= product.product.price;
+      this.bill -= product.product.price
     }
   }
 
@@ -106,14 +101,20 @@ export class MenuComponent {
   addClientName(event: Event) {
     const element = event.target as HTMLInputElement;
     this.order.client= element.value;
-    console.log(this.order.client)
+  }
+
+  postOrder(order:any){
+    this.api.saveOrder(order).subscribe({
+      next: (data: any) => {
+        console.log(data);
+      }
+    })
   }
 
   // Fx agrega fecha y hora a la orden y agrega array de productsSelected a los productos de la orden
   createOrder(){
     this.order.dataEntry = new Date().toLocaleString();
-    this.order.products.push(this.productsSelected);
-    console.log(this.order);
+    this.postOrder(this.order)
   }
 
   //====================================== menú hamburguesa ======================================//
