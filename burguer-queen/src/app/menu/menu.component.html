@@ -76,7 +76,7 @@
         Lista de ordenes
       </div>
 
-      <form [formGroup]="clientOrder" (ngSubmit)="createOrder()">
+      <form [formGroup]="clientOrder">
         <div class="col mx-auto d-block text-center">
           <label for="name" class="texto" style="margin-right: 10px;">Cliente: </label>
           <input class="cliente" formControlName="clientName" [value]="order.client" (blur)="addClientName($event)"
@@ -114,7 +114,7 @@
             <p>{{bill | currency: '$ '}}</p>
           </div>
           <div class="col col-md-4 text-left">
-            <button type="submit" class="btn-crearPedido" [disabled]="clientOrder.invalid">Crear pedido</button>
+            <button type="submit" class="btn-crearPedido" [disabled]="clientOrder.invalid" (click)='createOrder()'>Crear pedido</button>
           </div>
         </div>
       </form>
