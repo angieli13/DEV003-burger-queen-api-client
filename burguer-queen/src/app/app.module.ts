@@ -7,6 +7,7 @@ import { MenuComponent } from './menu/menu.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { OrdersComponent } from './orders/orders.component'
+import { NgToastModule } from 'ng-angular-popup';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { OrdersComponent } from './orders/orders.component'
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgToastModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

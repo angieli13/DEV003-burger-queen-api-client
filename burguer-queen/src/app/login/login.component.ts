@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { LoginI } from '../interfaces/login.interface';
-import { ResponseI } from '../interfaces/response.interface';
+import { NgToastService } from 'ng-angular-popup';
 import { ApiBQService } from '../services/api-bq.service';
 import { Router } from '@angular/router';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
@@ -19,7 +18,7 @@ export class LoginComponent {
     //FormControl maneja los valores y validaciones de un campo de formulario específico.
   })
 
-  constructor( private api:ApiBQService, private router:Router) {}
+  constructor( private api:ApiBQService, private router:Router, private toast: NgToastService ) {}
   errorStatus:boolean = false;
   errorMsg:any = "";
 
@@ -33,12 +32,14 @@ export class LoginComponent {
       let dataResponse:any = data;
       sessionStorage.setItem("token", dataResponse.accessToken);
       console.log(dataResponse.token);
+      this.showSuccess();
 
       if(dataResponse.user.role === "waiter"){
         this.router.navigate(['menu'])
       } else if (dataResponse.user.role === "cheff") {
         this.router.navigate(['orders'])
       } else {
+        this.showError("Access denied, contact admin")
         this.errorStatus = true;
         this.errorMsg = "Usuario no tiene permiso para acceder, consultar con administrador";
 
@@ -46,7 +47,7 @@ export class LoginComponent {
     },
       error: (error:any) => {
         console.log(error);
-
+        this.showError(error.error);
           this.errorStatus = true;
           this.errorMsg = error.error;
       },
@@ -63,6 +64,20 @@ export class LoginComponent {
     return this.formLogin.get('password') as FormControl;
   }
 
+  showSuccess() {
+    this.toast.success({detail:"Success Message",summary:'Login successfully', duration:5000});
+  }
 
+  showError(errorMsg:string) {
+    this.toast.error({detail:"Error Message",summary: errorMsg, duration:5000});
+  }
+
+  visible:boolean = true;
+  changetype:boolean =true;
+
+  viewpass(){
+    this.visible = !this.visible;
+    this.changetype = !this.changetype;
+  }
 
 }

@@ -3,18 +3,18 @@
     <div class="col-md-4" *ngFor="let order of ordersArray" style="background-color: yellowgreen;">
       <section class="rounded p-1" style="background-color: #FDE293;">
         <div class=" row rounded mx-1 my-2 px-3" style="background-color: white;">
-          Cliente: {{order.client}}
+          Client: {{order.client}}
         </div>
 
         <div class="row rounded m-1 my-2 px-2" style="background-color: white;">
           <div class="col">
-            <p>Productos</p>
+            <p>Products</p>
             <div *ngFor="let orderProducts of order.products">
               {{orderProducts.product.name}}
             </div>
           </div>
           <div class="col">
-            <p>Cantidad</p>
+            <p>Quantity</p>
             <div *ngFor="let orderProducts of order.products">
               {{orderProducts.qty}}
             </div>
@@ -23,11 +23,11 @@
 
         <div class="row" class="row rounded m-1 my-2 px-2" style="background-color: white;">
           <div class="col">
-            <p>Estado</p>
+            <p>State</p>
             {{order.status}}
           </div>
           <div class="col">
-            <p>Tiempo</p>
+            <p>Time</p>
             {{order.dataEntry}}
           </div>
         </div>

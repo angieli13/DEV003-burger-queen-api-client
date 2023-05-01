@@ -197,7 +197,7 @@
   /* Añade scrollbar */
   overflow-x: hidden;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
-  border-radius: 25px;
+  border-radius: 15px;
 }
 
 
@@ -205,7 +205,7 @@
 .col-segundaC {
   background-color: #fde293;
   opacity: 9;
-  border-radius: 25px;
+  border-radius: 15px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
   height: 530px;
 }
@@ -332,4 +332,8 @@
 
 .btn-crearPedido:focus {
   outline: none;
+}
+
+.product {
+  font-size: 20px;
 }
