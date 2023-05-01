@@ -132,17 +132,23 @@ export class MenuComponent {
     }
   }
 
-  // Funciones para manejar las opciones del menú
-  irAPedidos() {
-    // Lógica para redireccionar a la página de Pedidos
+  // Funciones para manejar las opciones del menú hamburguesa
+  irAOrders() {
+    this.router.navigate(['/orders']);
   }
 
   irAMenu() {
-    // Lógica para redireccionar a la página de Menú
+    this.router.navigate(['/menu']);
   }
 
   cerrarSesion() {
-    // Lógica para cerrar sesión
+
+      // Borrar data de sesión
+      localStorage.removeItem('token'); // Borrar token de autenticación
+      localStorage.removeItem('user'); // Borrar datos del usuario
+      // Redirigir al usuario a la página de inicio de sesión
+      this.router.navigate(['']);
+
   }
 
 }
