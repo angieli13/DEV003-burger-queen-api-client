@@ -1,24 +1,5 @@
 <!--======================================   Imagenes logo y menú hamburguesa ======================================  -->
-<div class="row row-estilo1 m-2 justify-content-start align-items-center">
-  <div class="col">
-    <img class="logo-img" src="../assets/images/logoBQ-horizontal.png">
-  </div>
-  <div class="col text-center">
-    <!-- Espacio en el medio -->
-  </div>
-  <div class="col m-8 img-menuHamburguesa-container">
-    <img class="img-menuHamburguesa" src="../assets/images/m-hamburg.png" (click)="mostrarMenu()">
-    <!-- Menú desplegable -->
-    <div class="menuDesplegable" *ngIf="mostrarMenuDesplegable">
-      <ul>
-        <li (click)="irAOrders()">Orders</li>
-        <li (click)="irAMenu()">Menu</li>
-        <li (click)="cerrarSesion()">Logout</li>
-      </ul>
-    </div>
-  </div>
-</div>
-
+<app-header [componentTitle]='title'></app-header>
 <!--======================================   Aquí los dos contenedores ======================================  -->
 <div class="row row-estilo2 m-2">
   <div class="col-md-6 col-primerContainer mx-3">

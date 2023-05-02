@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output } from '@angular/core';
 import { ApiBQService } from '../services/api-bq.service';
 import { Router } from '@angular/router';
 
@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./orders.component.scss']
 })
 export class OrdersComponent {
+
+  @Output() title:any = "Orders"
 
   ordersArray:any[] = []
   ordersProducts:any[] = []

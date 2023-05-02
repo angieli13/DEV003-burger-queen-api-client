@@ -1,0 +1,20 @@
+<div class="row m-2">
+  <div class="col-3">
+    <img class="logo-img px-3" src="../assets/images/logoBQ-horizontal.png">
+  </div>
+  <div class="col-6 text-center mt-4 pt-2 title">
+    {{componentTitle}}
+    <!-- Espacio en el medio -->
+  </div>
+  <div class="col-3 img-menuHamburguesa-container text-right">
+    <img class="img-menuHamburguesa" src="../assets/images/m-hamburg.png" (click)="mostrarMenu()">
+    <!-- Menú desplegable -->
+    <div class="menuDesplegable" *ngIf="mostrarMenuDesplegable">
+      <ul>
+        <li (click)="irAMenu()">Menu</li>
+        <li (click)="irAOrders()">Orders</li>
+        <li (click)="cerrarSesion()">Logout</li>
+      </ul>
+    </div>
+  </div>
+</div>

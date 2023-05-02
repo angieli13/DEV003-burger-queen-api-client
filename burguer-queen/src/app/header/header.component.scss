@@ -1,0 +1,62 @@
+.logo-img {
+  height: 100px;
+}
+
+.title{
+  font-size: 25px;
+  font-family: caviarD;
+}
+.img-menuHamburguesa {
+  height: 100px;
+  transition: transform 0.3s ease-in-out;
+  padding-left: 120px;
+  /* Transición  para el efecto de hundimiento */
+}
+
+.img-menuHamburguesa:hover {
+  transform: scale(0.9);
+  /* Escala la imagen al 90% del tamaño original */
+}
+
+.img-menuHamburguesa:active {
+  transform: scale(0.8);
+  /* Escala la imagen al 80% del tamaño original al hacer clic */
+}
+
+
+.menuDesplegable {
+  position: absolute;
+  right: 40px;
+  background-color: white;
+  /* Estilos para el efecto 3D */
+  border: 1px solid #f4c1a2;
+  border-radius: 4px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  transform: perspective(800px) rotateX(-10deg);
+  transform-origin: top right;
+  min-width: 10px;
+  /* Ancho mínimo en px o % */
+  max-width: 30%;
+  /* Ancho máximo en px o % */
+  width: 10%;
+  /* Ancho inicial en % */
+}
+
+.menuDesplegable ul {
+  list-style-type: none;
+  text-align: center;
+  /* Alinea los elementos al centro */
+  margin: 0;
+  /* Quita el margen predeterminado */
+  padding: 0;
+  /* Quita el padding predeterminado */
+}
+
+.menuDesplegable ul li:hover {
+  background-color: #FDE293;
+  opacity: 10;
+  border-radius: 10px;
+  font-family: caviarD;
+  margin: 5px 0;
+
+}

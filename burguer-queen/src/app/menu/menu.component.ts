@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Output } from '@angular/core';
 import { ApiBQService } from '../services/api-bq.service';
 import { Router } from '@angular/router';
 import { LoginComponent } from '../login/login.component';
@@ -13,6 +13,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 //====================================== navbar menú ======================================//
 export class MenuComponent {
+
+  @Output() title:any = "Menu"
 
   //se utiliza para encapsular y gestionar la lógica de validación y estado de un formulario
   clientOrder = new FormGroup({
@@ -115,40 +117,6 @@ export class MenuComponent {
   createOrder(){
     this.order.dataEntry = new Date().toLocaleString();
     this.postOrder(this.order)
-  }
-
-  //====================================== menú hamburguesa ======================================//
-
-  mostrarMenuDesplegable = false; // Variable para controlar la visibilidad del menú desplegable
-
-  // Función para mostrar u ocultar el menú desplegable al hacer clic en la imagen
-  mostrarMenu() {
-    if (this.mostrarMenuDesplegable) {
-      // Si el menú está abierto, se cierra
-      this.mostrarMenuDesplegable = false;
-    } else {
-      // Si el menú está cerrado, se abre
-      this.mostrarMenuDesplegable = true;
-    }
-  }
-
-  // Funciones para manejar las opciones del menú hamburguesa
-  irAOrders() {
-    this.router.navigate(['/orders']);
-  }
-
-  irAMenu() {
-    this.router.navigate(['/menu']);
-  }
-
-  cerrarSesion() {
-
-      // Borrar data de sesión
-      localStorage.removeItem('token'); // Borrar token de autenticación
-      localStorage.removeItem('user'); // Borrar datos del usuario
-      // Redirigir al usuario a la página de inicio de sesión
-      this.router.navigate(['']);
-
   }
 
 }
