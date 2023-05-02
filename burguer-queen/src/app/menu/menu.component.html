@@ -2,7 +2,7 @@
 <app-header [componentTitle]='title'></app-header>
 <!--======================================   Aquí los dos contenedores ======================================  -->
 <div class="row row-estilo2 m-2">
-  <div class="col-md-6 col-primerContainer mx-3">
+  <div class="col-md-7 col-primerContainer mx-3">
     <!-- Contenido de la primera columna -->
     <div class="col m-2">
       <!-- ====================================== navbar menú ====================================== -->
@@ -50,7 +50,7 @@
   </div>
 
   <!-- Contenido de la segunda columna -->
-  <div class="col-md-5 mx-3 col-segundaC">
+  <div class="col-md-4 mx-3 col-segundaC">
     <div class="row row-contenedores">
       <!-- Primer contenedor -->
       <div class=" col-orden ">
@@ -68,7 +68,7 @@
         <div class="col-aparecenLasO">
           <div *ngFor="let product of order.products" class="row row-ordenes">
             <!-- Primera columna -->
-            <div class="col-md-6">
+            <div class="col-md-5">
               {{product.product.name }}
             </div>
             <!-- Segunda columna -->
@@ -76,8 +76,9 @@
               {{ product.product.price | currency: '$ '}}
             </div>
             <!-- Tercera columna -->
-            <div class="col-md-2 quantity-increment d-flex align-items-center">
-              <button class="btn-cantidadProductos" (click)="decreaseQty(product)">-</button>
+            <div class="col-md-3 quantity-increment d-flex align-items-center">
+              <button *ngIf="product.showDeleteButton" class="btn-eliminarProducto" (click)="removeProductFromOrder(product)">🗑️</button>
+              <button *ngIf="!product.showDeleteButton" class="btn-cantidadProductos" (click)="decreaseQty(product)">-</button>
               <p class="cantidadProductos">{{product.qty}}</p>
               <button class="btn-cantidadProductos" (click)="increaseQty(product)">+</button>
             </div>
@@ -95,7 +96,8 @@
             <p>{{bill | currency: '$ '}}</p>
           </div>
           <div class="col col-md-4 text-left">
-            <button type="submit" class="btn-crearPedido" [disabled]="clientOrder.invalid" (click)='createOrder()'>Create Order</button>
+            <button type="submit" class="btn-crearPedido" [disabled]="clientOrder.invalid"
+              (click)='createOrder()'>Create Order</button>
           </div>
         </div>
       </form>

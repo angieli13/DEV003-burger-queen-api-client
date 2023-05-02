@@ -255,10 +255,28 @@
 
 .quantity-increment {
   display: flex;
-  justify-content: space-between;
   align-items: center;
 }
+.btn-eliminarProducto {
+  width: 30px;
+  height: 30px;
+  background-color: #EA8D6F;
+  border: none;
+  border-radius: 3px;
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #333;
+  font-weight: bold;
+  transition: transform 0.3s ease-in-out;
+  /* Transición suave del efecto */
 
+}
+
+.btn-eliminarProducto {
+  transform: scale(0.95);
+}
 .cantidadProductos {
   margin: 0;
   font-size: 20px;
@@ -280,7 +298,7 @@
   font-weight: bold;
   transition: transform 0.3s ease-in-out;
   /* Transición suave del efecto */
-  flex-grow: 1;
+
 }
 
 .btn-cantidadProductos:hover {
