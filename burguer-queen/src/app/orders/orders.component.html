@@ -29,7 +29,7 @@
           </div>
           <div class="col">
             <p>Time</p>
-            {{order.dataEntry}}
+            {{order.dataEntry | date: 'shortTime'}}
           </div>
         </div>
       </section>

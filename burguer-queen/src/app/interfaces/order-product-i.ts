@@ -8,5 +8,4 @@ export interface OrderProductI {
       type: string,
       dateEntry: string,
     };
-    showDeleteButton?: boolean;
 }

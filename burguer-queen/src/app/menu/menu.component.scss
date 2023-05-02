@@ -257,49 +257,55 @@
   display: flex;
   align-items: center;
 }
-.btn-eliminarProducto {
-  width: 30px;
-  height: 30px;
+.btn-Productos {
+  height: 25px;
   background-color: #EA8D6F;
   border: none;
-  border-radius: 3px;
-  font-size: 16px;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #333;
   font-weight: bold;
   transition: transform 0.3s ease-in-out;
   /* Transición suave del efecto */
-
 }
+
+.left {
+  border-radius: 15px 0 0 15px;
+}
+
+.right {
+  border-radius: 0 15px 15px 0;
+}
+// .btn-cantidadProductos {
+//   width: 30px;
+//   height: 30px;
+//   background-color: #EA8D6F;
+//   border: none;
+//   border-radius: 3px;
+//   font-size: 16px;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   color: #333;
+//   font-weight: bold;
+//   transition: transform 0.3s ease-in-out;
+//   /* Transición suave del efecto */
+
+// }
 
 .btn-eliminarProducto {
   transform: scale(0.95);
 }
 .cantidadProductos {
   margin: 0;
-  font-size: 20px;
+  height: 25px;
+  padding: 0 5px;
+  font-size: 16px;
   font-weight: bold;
   background-color: white;
 }
 
-.btn-cantidadProductos {
-  width: 30px;
-  height: 30px;
-  background-color: #EA8D6F;
-  border: none;
-  border-radius: 3px;
-  font-size: 16px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #333;
-  font-weight: bold;
-  transition: transform 0.3s ease-in-out;
-  /* Transición suave del efecto */
 
-}
 
 .btn-cantidadProductos:hover {
   transform: scale(0.95);

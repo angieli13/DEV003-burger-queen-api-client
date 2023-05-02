@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { LoginComponent } from '../login/login.component';
 import { OrderProductI } from '../interfaces/order-product-i';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-menu',
@@ -22,7 +23,7 @@ export class MenuComponent {
   })
 
   // Para cargar los productos desde la API
-  constructor(private api: ApiBQService, private router: Router) {
+  constructor(private api: ApiBQService, private router: Router, private toast: NgToastService) {
     this.loadProducts();
   }
 
@@ -77,7 +78,6 @@ export class MenuComponent {
         type: product.type,
         dateEntry: product.dateEntry
       },
-      showDeleteButton: true
     };
 
     this.bill += 1 * product.price;
@@ -88,7 +88,6 @@ export class MenuComponent {
   increaseQty(product: OrderProductI) {
     product.qty++;
     this.bill += product.product.price;
-    product.showDeleteButton = false; // <--- establecer la propiedad showDeleteButton a false
   }
 
 
@@ -96,13 +95,11 @@ export class MenuComponent {
   decreaseQty(product: OrderProductI) {
     if (product.qty === 0) {
       product.qty = 0
-      product.showDeleteButton = true; // <--- establecer la propiedad showDeleteButton a true
     } else {
       product.qty--;
       this.bill -= product.product.price
     }
   }
-
 
   // Elimina el producto del array de productos seleccionados
   removeProductFromOrder(product: OrderProductI) {
@@ -130,15 +127,32 @@ export class MenuComponent {
   postOrder(order: any) {
     this.api.saveOrder(order).subscribe({
       next: (data: any) => {
+        this.showSuccess();
         console.log(data);
-      }
+      },
+      error: (error:any) => {
+        this.showError();
+        console.log(error);
+
+      },
     })
+  }
+
+  showSuccess() {
+    this.toast.success({detail:"Success!",summary:'Order created successfully', duration:3000});
+  }
+
+  showError() {
+    this.toast.error({detail:"Error",summary: 'Something went wrong, try again', duration:3000});
   }
 
   // Fx agrega fecha y hora a la orden y agrega array de productsSelected a los productos de la orden
   createOrder() {
     this.order.dataEntry = new Date().toLocaleString();
-    this.postOrder(this.order)
+    this.postOrder(this.order);
+    this.clientOrder.reset();
+    this.order.products.splice(0, (this.order.products.length));
+    this.bill = 0;
   }
 }
 

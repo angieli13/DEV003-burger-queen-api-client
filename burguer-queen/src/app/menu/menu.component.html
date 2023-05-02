@@ -68,19 +68,19 @@
         <div class="col-aparecenLasO">
           <div *ngFor="let product of order.products" class="row row-ordenes">
             <!-- Primera columna -->
-            <div class="col-md-5">
+            <div class="col-md-6">
               {{product.product.name }}
             </div>
             <!-- Segunda columna -->
-            <div class="col-md-4">
+            <div class="col-md-3">
               {{ product.product.price | currency: '$ '}}
             </div>
             <!-- Tercera columna -->
             <div class="col-md-3 quantity-increment d-flex align-items-center">
-              <button *ngIf="product.showDeleteButton" class="btn-eliminarProducto" (click)="removeProductFromOrder(product)">🗑️</button>
-              <button *ngIf="!product.showDeleteButton" class="btn-cantidadProductos" (click)="decreaseQty(product)">-</button>
+              <i *ngIf="product.qty === 1" class="btn-Productos px-2 left fa-solid fa-trash" (click)="removeProductFromOrder(product)"></i>
+              <i *ngIf="product.qty > 1" class="btn-Productos px-2 left fa-solid fa-minus" (click)="decreaseQty(product)"></i>
               <p class="cantidadProductos">{{product.qty}}</p>
-              <button class="btn-cantidadProductos" (click)="increaseQty(product)">+</button>
+              <i class="btn-Productos px-2 right fa-solid fa-plus" (click)="increaseQty(product)"></i>
             </div>
           </div>
         </div>
@@ -89,13 +89,10 @@
 
         <!-- Tercer contenedor -->
         <div class="row-bill">
-          <div class="col-md-4 col-total ">
-            <p>Total:</p>
+          <div class="col-md col-total px-2 text-center">
+            <p>Total: {{bill | currency: '$ '}}</p>
           </div>
-          <div class="col-md-4 col-totalProductos">
-            <p>{{bill | currency: '$ '}}</p>
-          </div>
-          <div class="col col-md-4 text-left">
+          <div class="col col-md px-2text-left">
             <button type="submit" class="btn-crearPedido" [disabled]="clientOrder.invalid"
               (click)='createOrder()'>Create Order</button>
           </div>

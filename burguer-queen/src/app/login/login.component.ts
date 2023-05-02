@@ -65,12 +65,14 @@ export class LoginComponent {
   }
 
   showSuccess() {
-    this.toast.success({detail:"Success Message",summary:'Login successfully', duration:5000});
+    this.toast.success({detail:"Success!",summary:'Login successfully', duration:5000});
   }
 
   showError(errorMsg:string) {
-    this.toast.error({detail:"Error Message",summary: errorMsg, duration:5000});
+    this.toast.error({detail:"Error",summary: errorMsg, duration:5000});
   }
+
+// Cambia visibilidad del password
 
   visible:boolean = true;
   changetype:boolean =true;

@@ -12,7 +12,6 @@ export class OrdersComponent {
   @Output() title:any = "Orders"
 
   ordersArray:any[] = []
-  ordersProducts:any[] = []
 
   // Para cargar los productos desde la API
   constructor(private api: ApiBQService, private router: Router) {
@@ -23,12 +22,6 @@ export class OrdersComponent {
     this.api.getOrders().subscribe({
       next: (data: any) => {
         this.ordersArray = data;
-
-        data.map((order:any)=>{this.ordersProducts.push(order.products)})
-        console.log(this.ordersArray);
-        console.log(this.ordersProducts);
-
-
       }
     })
   }
