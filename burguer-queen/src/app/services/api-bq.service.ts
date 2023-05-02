@@ -18,7 +18,7 @@ export class ApiBQService {
     return this.http.post<any>(authUrl, form)
   }
 
-  // Fx para obtener prod
+  // Fx para obtener productos
   getMenu():Observable<any>{
     let token = sessionStorage.getItem('token')
     let menuUrl = this.url + 'products'
@@ -27,11 +27,19 @@ export class ApiBQService {
     return this.http.get<any>(menuUrl,{'headers': productHeader})
   }
 
-
+  // Fx para enviar ordenes
   saveOrder(order:any):Observable<any>{
     let token = sessionStorage.getItem('token')
     let productHeader = new HttpHeaders().set('Authorization', 'Bearer ' + token)
     let orderUrl = this.url + 'orders'
     return this.http.post<any>(orderUrl, order, {'headers': productHeader})
+  }
+
+  // Fx para enviar ordenes
+  getOrders():Observable<any>{
+    let token = sessionStorage.getItem('token')
+    let productHeader = new HttpHeaders().set('Authorization', 'Bearer ' + token)
+    let orderArrayUrl = this.url + 'orders'
+    return this.http.get<any>(orderArrayUrl, {'headers': productHeader})
   }
 }

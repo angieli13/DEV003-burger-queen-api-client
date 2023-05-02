@@ -5,10 +5,11 @@ import { MenuComponent } from './menu/menu.component';
 import { OrdersComponent } from './orders/orders.component';
 
 
+
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'menu', component: MenuComponent },
-  { path: 'orders', component: OrdersComponent }
+  { path: 'orders', component: OrdersComponent },
 ];
 
 @NgModule({

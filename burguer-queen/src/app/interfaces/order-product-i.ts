@@ -7,5 +7,5 @@ export interface OrderProductI {
       image: string,
       type: string,
       dateEntry: string,
-    }
+    };
 }

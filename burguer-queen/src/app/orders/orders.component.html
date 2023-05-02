@@ -1,1 +1,38 @@
-<p>orders works!</p>
+<app-header [componentTitle]='title'></app-header>
+<div class="container mt-4">
+  <div class="row gy-3" style="background-color: rgb(251, 157, 75);">
+    <div class="col-md-4" *ngFor="let order of ordersArray" style="background-color: yellowgreen;">
+      <section class="rounded p-1" style="background-color: #FDE293;">
+        <div class=" row rounded mx-1 my-2 px-3" style="background-color: white;">
+          Client: {{order.client}}
+        </div>
+
+        <div class="row rounded m-1 my-2 px-2" style="background-color: white;">
+          <div class="col">
+            <p>Products</p>
+            <div *ngFor="let orderProducts of order.products">
+              {{orderProducts.product.name}}
+            </div>
+          </div>
+          <div class="col">
+            <p>Quantity</p>
+            <div *ngFor="let orderProducts of order.products">
+              {{orderProducts.qty}}
+            </div>
+          </div>
+        </div>
+
+        <div class="row" class="row rounded m-1 my-2 px-2" style="background-color: white;">
+          <div class="col">
+            <p>State</p>
+            {{order.status}}
+          </div>
+          <div class="col">
+            <p>Time</p>
+            {{order.dataEntry | date: 'shortTime'}}
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
