@@ -14,11 +14,11 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 //====================================== navbar menú ======================================//
 export class MenuComponent {
 
-  @Output() title:any = "Menu"
+  @Output() title: any = "Menu"
 
   //se utiliza para encapsular y gestionar la lógica de validación y estado de un formulario
   clientOrder = new FormGroup({
-    clientName : new FormControl('',Validators.required)
+    clientName: new FormControl('', Validators.required)
   })
 
   // Para cargar los productos desde la API
@@ -36,10 +36,10 @@ export class MenuComponent {
   productsSelected: any[] = [];
 
   // La suma del total de productos
-  bill:number = 0;
+  bill: number = 0;
 
   // Estuctura de la orden para crear pedido http post
-  order:any = {
+  order: any = {
     client: "",
     status: "pending",
     dataEntry: "",
@@ -48,12 +48,12 @@ export class MenuComponent {
 
   loadProducts() {
     this.api.getMenu() // Trae funcion del servicio api (get http)
-    .subscribe({ // "inicia" el flujo observable, para gestionar los resultados de la llamada asíncrona de getMenu
-      next: (data: any) => {
-        this.allProducts = data;
-        this.products = data;
-      }
-    });
+      .subscribe({ // "inicia" el flujo observable, para gestionar los resultados de la llamada asíncrona de getMenu
+        next: (data: any) => {
+          this.allProducts = data;
+          this.products = data;
+        }
+      });
   }
 
   // Muestra tarjetas de productos según filtros
@@ -76,7 +76,8 @@ export class MenuComponent {
         image: product.image,
         type: product.type,
         dateEntry: product.dateEntry
-      }
+      },
+      showDeleteButton: true
     };
 
     this.bill += 1 * product.price;
@@ -85,27 +86,48 @@ export class MenuComponent {
 
   // Incrementa cantidad de productos
   increaseQty(product: OrderProductI) {
-    product.qty ++;
+    product.qty++;
     this.bill += product.product.price;
+    product.showDeleteButton = false; // <--- establecer la propiedad showDeleteButton a false
   }
 
+
   // Disminuye cantidad de productos
-  decreaseQty(product: OrderProductI){
+  decreaseQty(product: OrderProductI) {
     if (product.qty === 0) {
       product.qty = 0
+      product.showDeleteButton = true; // <--- establecer la propiedad showDeleteButton a true
     } else {
-      product.qty --;
+      product.qty--;
       this.bill -= product.product.price
     }
   }
 
+
+  // Elimina el producto del array de productos seleccionados
+  removeProductFromOrder(product: OrderProductI) {
+    //Se busca la posición del objeto product en el array de products de la orden order.
+    //Si el objeto no se encuentra en el array, index será igual a -1.
+    const index = this.order.products.indexOf(product);
+    //Si se encontró el objeto product en el array, se procede a ejecutar el código dentro del bloque de código del if.
+    if (index > -1) {
+      //se resta del valor de bill el costo total del producto que se va a eliminar de la orden
+      this.bill -= product.qty * product.product.price;
+      //splice() para eliminar el objeto product del array de products
+      this.order.products.splice(index, 1);
+      //recibe dos argumentos: el índice donde comienza la eliminación y el número de elementos que se eliminarán a partir de ese índice.
+      //Se eliminara solo el elemento en la posición index.
+    }
+  }
+
+
   // Guarda el valor del input del nombre de cliente con evento blur
   addClientName(event: Event) {
     const element = event.target as HTMLInputElement;
-    this.order.client= element.value;
+    this.order.client = element.value;
   }
 
-  postOrder(order:any){
+  postOrder(order: any) {
     this.api.saveOrder(order).subscribe({
       next: (data: any) => {
         console.log(data);
@@ -114,10 +136,9 @@ export class MenuComponent {
   }
 
   // Fx agrega fecha y hora a la orden y agrega array de productsSelected a los productos de la orden
-  createOrder(){
+  createOrder() {
     this.order.dataEntry = new Date().toLocaleString();
     this.postOrder(this.order)
   }
-
 }
 
