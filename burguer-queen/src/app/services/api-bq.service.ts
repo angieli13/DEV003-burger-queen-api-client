@@ -9,7 +9,8 @@ import { Observable } from 'rxjs';//un observable es un flujo de eventos o datos
 })
 export class ApiBQService {
 
-  url:string = "http://localhost:8080/";
+  //url:string = "http://localhost:8080/";//npm start
+  url:string = "https://api-mock-burguer-quenn.onrender.com/";
 
   constructor(private http:HttpClient) { }
 
