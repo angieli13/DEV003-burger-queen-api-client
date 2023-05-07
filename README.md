@@ -1,6 +1,7 @@
 ![head](./burguer-queen/src/assets/images/burguerq.gif)
 
-**# Burger Queen (API Client)**
+## **Burger Queen (API Client)**
+
 
 ## 1. Project Overview 
 
@@ -8,8 +9,11 @@ Burger Queen API Client is an application developed with [Angular](https://angul
 This project has two areas: interface (client) and API (server).
 
 🍔You can test the App by clicking [here](https://dev-003-burger-queen-api-client-tau.vercel.app/):
-   -👩🏻‍🍳User: grace.hopper@systers.xyz
-   -🔎Password: 123456
+
+- 👩🏻‍🍳 User: grace.hopper@systers.xyz
+
+- 🔎 Password: 123456
+
 
 🍔Mock for Burger Queen API [here](https://github.com/angieli13/burger-queen-api-mock)
 
